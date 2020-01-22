@@ -3,28 +3,29 @@ package com.heady.shop.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResultResponse implements Serializable {
 
     @SerializedName("categories")
-    private List<Category> categories = null;
+    private ArrayList<Category> categories = null;
     @SerializedName("rankings")
-    private List<Ranking> rankings = null;
+    private ArrayList<Ranking> rankings = null;
 
-    public List<Category> getCategories() {
+    public ArrayList<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(ArrayList<Category> categories) {
         this.categories = categories;
     }
 
-    public List<Ranking> getRankings() {
+    public ArrayList<Ranking> getRankings() {
         return rankings;
     }
 
-    public void setRankings(List<Ranking> rankings) {
+    public void setRankings(ArrayList<Ranking> rankings) {
         this.rankings = rankings;
     }
 

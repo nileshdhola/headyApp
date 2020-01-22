@@ -9,15 +9,11 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.gson.Gson;
 import com.heady.shop.model.ResultResponse;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Headyepository {
     private static final String TAG = "Headyepository";
-   // private ArrayList<ResultResponse> responseArrayList = new ArrayList<>();
+    // private ArrayList<ResultResponse> responseArrayList = new ArrayList<>();
     //private MutableLiveData<List<ResultResponse>> mutableLiveData = new MutableLiveData<>();
     private MutableLiveData<ResultResponse> mutableLiveData = new MutableLiveData<>();
     private ResultResponse resultResponse;
@@ -46,15 +42,7 @@ public class Headyepository {
                 try {
                     if (!TextUtils.isEmpty(output.toString())) {
                         JSONObject jObject = new JSONObject(output.toString());
-                        JSONArray jcategories = jObject.getJSONArray("categories");
-                        JSONArray jRanking = jObject.getJSONArray("rankings");
-
                         ResultResponse resultResponse = gson.fromJson(jObject.toString(), ResultResponse.class);
-
-                        /*Type resultList = new TypeToken<List<ResultResponse>>() {
-                        }.getType();
-                        List<ResultResponse> posts = gson.fromJson(jObject.toString(), resultList);
-                        responseArrayList = (ArrayList<ResultResponse>) resultResponse;*/
                         mutableLiveData.setValue(resultResponse);
 
                     } else {

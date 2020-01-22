@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.heady.shop.model.ResultResponse;
@@ -24,7 +25,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
 
-    public ResultResponse getResponseResult(Context context) {
+    public MutableLiveData<ResultResponse> getResponseResult(Context context) {
         return headyepository.getMutableLiveData(context);
     }
 
