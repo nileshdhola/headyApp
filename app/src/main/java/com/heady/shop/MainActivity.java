@@ -1,6 +1,7 @@
 package com.heady.shop;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -15,10 +16,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.heady.shop.activity.ProductActivity;
 import com.heady.shop.adapter.CategoriesAdapter;
 import com.heady.shop.databinding.ActivityMainBinding;
 import com.heady.shop.model.Category;
 import com.heady.shop.model.ResultResponse;
+import com.heady.shop.utils.CommonUtils;
 import com.heady.shop.utils.MainViewModel;
 
 import butterknife.BindView;
@@ -53,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
         //bind model data
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        getAllEmployee(this);
+        getDetails(this);
     }
 
     //region all employee data item insert in room data base
-    private void getAllEmployee(Context context) {
+    private void getDetails(Context context) {
         mainViewModel.getResponseResult(MainActivity.this).observe(this, new Observer<ResultResponse>() {
             @Override
             public void onChanged(ResultResponse resultResponse) {
@@ -70,7 +73,15 @@ public class MainActivity extends AppCompatActivity {
                     categoriesAdapter = new CategoriesAdapter(MainActivity.this, resultResponse.getCategories(), new CategoriesAdapter.IFCItemClick() {
                         @Override
                         public void clickCategoriesItem(String id, int position, Category result) {
-                            Toast.makeText(context, "" + result.getName(), Toast.LENGTH_SHORT).show();
+                            if (result.getProducts().size() == 0) {
+                                Toast.makeText(context, "No Product Found.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                String toStringProduct = CommonUtils.toJson(result.getProducts());
+                                Intent intent = new Intent(MainActivity.this, ProductActivity.class);
+                                intent.putExtra("product", toStringProduct);
+                                startActivity(intent);
+                            }
+
                         }
 
                     });

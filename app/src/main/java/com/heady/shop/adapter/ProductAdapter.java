@@ -10,36 +10,36 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.heady.shop.R;
-import com.heady.shop.databinding.CategoriesListItemBinding;
-import com.heady.shop.model.Category;
+import com.heady.shop.databinding.ProductListItemBinding;
+import com.heady.shop.model.Product;
 
 import java.util.ArrayList;
 
-public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> {
-    private ArrayList<Category> results;
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.CategoriesViewHolder> {
+    private ArrayList<Product> products;
     private Context context;
-    private IFCItemClick click;
+    private ProductAdapter.IFCItemClick click;
 
-    public CategoriesAdapter(Context context,ArrayList<Category> categories, IFCItemClick ifcItemClick) {
+    public ProductAdapter(Context context, ArrayList<Product> products, ProductAdapter.IFCItemClick ifcItemClick) {
         this.context = context;
-        this.results = categories;
+        this.products = products;
         this.click = ifcItemClick;
     }
 
 
     public interface IFCItemClick {
-        void clickCategoriesItem(String id, int position, Category result);
+        void clickCategoriesItem(String id, int position, Product result);
 
     }
 
     @NonNull
     @Override
-    public CategoriesViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        CategoriesListItemBinding resultListItemBinding =
+    public ProductAdapter.CategoriesViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        ProductListItemBinding resultListItemBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()),
-                        R.layout.categories_list_item, viewGroup, false);
+                        R.layout.product_list_item, viewGroup, false);
 
-        return new CategoriesViewHolder(resultListItemBinding);
+        return new ProductAdapter.CategoriesViewHolder(resultListItemBinding);
     }
 
     @Override
@@ -53,10 +53,10 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoriesViewHolder CategoriesViewHolder, int i) {
+    public void onBindViewHolder(@NonNull ProductAdapter.CategoriesViewHolder CategoriesViewHolder, int i) {
         CategoriesViewHolder.setIsRecyclable(false);
-        Category result = results.get(i);
-        CategoriesViewHolder.resultListItemBinding.setCategory(result);
+        Product result = products.get(i);
+        CategoriesViewHolder.resultListItemBinding.setProduct(result);
 
         CategoriesViewHolder.resultListItemBinding.cvEmployee.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +72,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     @Override
     public int getItemCount() {
-        if (results != null) {
-            return results.size();
+        if (products != null) {
+            return products.size();
         } else {
             return 0;
         }
@@ -82,14 +82,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     class CategoriesViewHolder extends RecyclerView.ViewHolder {
 
-        private CategoriesListItemBinding resultListItemBinding;
+        private ProductListItemBinding resultListItemBinding;
 
-        public CategoriesViewHolder(@NonNull CategoriesListItemBinding resultListItemBinding) {
+        public CategoriesViewHolder(@NonNull ProductListItemBinding resultListItemBinding) {
             super(resultListItemBinding.getRoot());
 
             this.resultListItemBinding = resultListItemBinding;
         }
     }
-
 
 }
