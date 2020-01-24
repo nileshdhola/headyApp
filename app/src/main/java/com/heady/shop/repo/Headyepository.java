@@ -1,4 +1,4 @@
-package com.heady.shop.utils;
+package com.heady.shop.repo;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -13,8 +13,6 @@ import org.json.JSONObject;
 
 public class Headyepository {
     private static final String TAG = "Headyepository";
-    // private ArrayList<ResultResponse> responseArrayList = new ArrayList<>();
-    //private MutableLiveData<List<ResultResponse>> mutableLiveData = new MutableLiveData<>();
     private MutableLiveData<ResultResponse> mutableLiveData = new MutableLiveData<>();
     private ResultResponse resultResponse;
 
@@ -22,17 +20,14 @@ public class Headyepository {
     public Headyepository() {
     }
 
-    /*public MutableLiveData<List<ResultResponse>> getMutableLiveData(Context context) {
-        MutableLiveData<List<ResultResponse>> liveData = callAPI(context);
-        return liveData;
-    }*/
-
+    //region live data from service
     public MutableLiveData<ResultResponse> getMutableLiveData(Context context) {
         MutableLiveData<ResultResponse> liveData = callAPI(context);
         return liveData;
     }
+    //endregion
 
-
+    //region calling api webservice
     private MutableLiveData<ResultResponse> callAPI(Context context) {
 
         OkHttpAync okHttpAync = new OkHttpAync(context, new OkHttpAync.AsyncResponse() {
@@ -58,6 +53,7 @@ public class Headyepository {
 
         return mutableLiveData;
     }
+    //endregion
 
 
 }

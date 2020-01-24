@@ -35,39 +35,40 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.activity_main);
         ActivityMainBinding activityMainBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_main);
+
         //init
         ButterKnife.bind(this);
+        //bind view
 
         txtData = activityMainBinding.txtData;
         toolbar = activityMainBinding.toolbar;
         setSupportActionBar(toolbar);
 
+        //recycle view
         recyclerView = activityMainBinding.viewUserRecyclerview;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 1);
         recyclerView.setLayoutManager(gridLayoutManager);
         //bind model data
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        getAllEmployee(this);
+        getAllData(this);
     }
 
-    //region all employee data item insert in room data base
-    private void getAllEmployee(Context context) {
+    //region show item in recyclerview adapter
+    private void getAllData(Context context) {
         mainViewModel.getResponseResult(MainActivity.this).observe(this, new Observer<ResultResponse>() {
             @Override
             public void onChanged(ResultResponse resultResponse) {
                 System.out.println(resultResponse.getCategories().size());
                 if (resultResponse.getCategories().size() > 0) {
-                    //categoriesAdapter.setCategoriesList(resultResponse.getCategories());
                     txtData.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
-
-                    categoriesAdapter = new CategoriesAdapter(MainActivity.this, resultResponse.getCategories(), new CategoriesAdapter.IFCItemClick() {
+                    categoriesAdapter.setCategoriesList(resultResponse.getCategories());
+                    categoriesAdapter = new CategoriesAdapter(MainActivity.this, new CategoriesAdapter.IFCItemClick() {
                         @Override
                         public void clickCategoriesItem(String id, int position, Category result) {
                             Toast.makeText(context, "" + result.getName(), Toast.LENGTH_SHORT).show();

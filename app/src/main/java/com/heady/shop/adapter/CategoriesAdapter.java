@@ -20,9 +20,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     private Context context;
     private IFCItemClick click;
 
-    public CategoriesAdapter(Context context,ArrayList<Category> categories, IFCItemClick ifcItemClick) {
+    /*  public CategoriesAdapter(Context context, ArrayList<Category> categories, IFCItemClick ifcItemClick) {
+          this.context = context;
+          this.results = categories;
+          this.click = ifcItemClick;
+      }*/
+    public CategoriesAdapter(Context context, IFCItemClick ifcItemClick) {
         this.context = context;
-        this.results = categories;
         this.click = ifcItemClick;
     }
 
@@ -67,7 +71,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             @Override
             public void onClick(View v) {
                 click.clickCategoriesItem(String.valueOf(result.getId()), i, result);
-                // DrawableCompat.setTint(CategoriesViewHolder.employeeListItemBinding.like.getDrawable(), ContextCompat.getColor(context, R.color.colorPrimary));
             }
         });
 

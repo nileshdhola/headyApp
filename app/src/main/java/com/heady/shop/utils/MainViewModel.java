@@ -4,16 +4,11 @@ import android.app.Application;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.heady.shop.model.ResultResponse;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.heady.shop.repo.Headyepository;
 
 public class MainViewModel extends AndroidViewModel {
 
@@ -25,10 +20,11 @@ public class MainViewModel extends AndroidViewModel {
     }
 
 
+    //region get response from service result
     public MutableLiveData<ResultResponse> getResponseResult(Context context) {
         return headyepository.getMutableLiveData(context);
     }
-
+    //endregion
 
 
 

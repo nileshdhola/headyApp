@@ -9,6 +9,7 @@ import okhttp3.Response;
 
 public class CommonUtils {
 
+    //region calling OKHttp clicent service
     public static Object getHttpResponse() {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(15, TimeUnit.SECONDS)
@@ -32,5 +33,6 @@ public class CommonUtils {
         }
         //return null;
     }
+    //endregion
 
 }

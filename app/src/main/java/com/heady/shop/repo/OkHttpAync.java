@@ -1,8 +1,10 @@
-package com.heady.shop.utils;
+package com.heady.shop.repo;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+
+import com.heady.shop.utils.CommonUtils;
 
 public class OkHttpAync extends AsyncTask<Object, Object, Object> {
     private AsyncResponse ifcResponse;
