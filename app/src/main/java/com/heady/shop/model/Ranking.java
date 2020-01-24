@@ -3,14 +3,14 @@ package com.heady.shop.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Ranking implements Serializable {
 
     @SerializedName("ranking")
     private String ranking;
     @SerializedName("products")
-    private List<ProductRanking> products = null;
+    private ArrayList<ProductRanking> products = null;
 
     public String getRanking() {
         return ranking;
@@ -20,11 +20,11 @@ public class Ranking implements Serializable {
         this.ranking = ranking;
     }
 
-    public List<ProductRanking> getProducts() {
+    public ArrayList<ProductRanking> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductRanking> products) {
+    public void setProducts(ArrayList<ProductRanking> products) {
         this.products = products;
     }
 

@@ -1,6 +1,7 @@
 package com.heady.shop.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.heady.shop.R;
 import com.heady.shop.databinding.CategoriesListItemBinding;
 import com.heady.shop.model.Category;
+import com.heady.shop.model.Product;
 
 import java.util.ArrayList;
 
@@ -20,19 +22,16 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     private Context context;
     private IFCItemClick click;
 
-    /*  public CategoriesAdapter(Context context, ArrayList<Category> categories, IFCItemClick ifcItemClick) {
-          this.context = context;
-          this.results = categories;
-          this.click = ifcItemClick;
-      }*/
-    public CategoriesAdapter(Context context, IFCItemClick ifcItemClick) {
+
+    public CategoriesAdapter(Context context, ArrayList<Category> categories, IFCItemClick ifcItemClick) {
         this.context = context;
+        this.results = categories;
         this.click = ifcItemClick;
     }
 
 
     public interface IFCItemClick {
-        void clickCategoriesItem(String id, int position, Category result);
+        void clickCategoriesItem(String id, int position, ArrayList<Product> result);
 
     }
 
@@ -62,10 +61,14 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         Category result = results.get(i);
         CategoriesViewHolder.resultListItemBinding.setCategory(result);
 
+        if (!TextUtils.isEmpty(result.getName().trim())) {
+            String firstLetter = String.valueOf(result.getName().trim().toUpperCase().charAt(0));
+            CategoriesViewHolder.resultListItemBinding.textFirst.setText(firstLetter);
+        }
         CategoriesViewHolder.resultListItemBinding.cvEmployee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                click.clickCategoriesItem(String.valueOf(result.getId()), i, result);
+                click.clickCategoriesItem(String.valueOf(result.getId()), i, result.getProducts());
             }
         });
 

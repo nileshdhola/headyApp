@@ -1,6 +1,7 @@
 package com.heady.shop;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -15,11 +16,15 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.heady.shop.activity.ProductActivity;
 import com.heady.shop.adapter.CategoriesAdapter;
 import com.heady.shop.databinding.ActivityMainBinding;
-import com.heady.shop.model.Category;
+import com.heady.shop.model.Product;
 import com.heady.shop.model.ResultResponse;
+import com.heady.shop.utils.CommonUtils;
 import com.heady.shop.utils.MainViewModel;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 1);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         //bind model data
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
@@ -67,11 +72,20 @@ public class MainActivity extends AppCompatActivity {
                 if (resultResponse.getCategories().size() > 0) {
                     txtData.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
-                    categoriesAdapter.setCategoriesList(resultResponse.getCategories());
-                    categoriesAdapter = new CategoriesAdapter(MainActivity.this, new CategoriesAdapter.IFCItemClick() {
+                    categoriesAdapter = new CategoriesAdapter(MainActivity.this, resultResponse.getCategories(), new CategoriesAdapter.IFCItemClick() {
                         @Override
-                        public void clickCategoriesItem(String id, int position, Category result) {
-                            Toast.makeText(context, "" + result.getName(), Toast.LENGTH_SHORT).show();
+                        public void clickCategoriesItem(String id, int position, ArrayList<Product> result) {
+                            if (result.size() > 0) {
+                                String rankingString = CommonUtils.toJson(resultResponse.getRankings());
+                                String jsonString = CommonUtils.toJson(result);
+                                Intent intent = new Intent(MainActivity.this, ProductActivity.class);
+                                intent.putExtra("product", jsonString);
+                                intent.putExtra("ranking", rankingString);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(MainActivity.this, "No Product Found", Toast.LENGTH_SHORT).show();
+                            }
+
                         }
 
                     });

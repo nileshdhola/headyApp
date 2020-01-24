@@ -1,6 +1,7 @@
 package com.heady.shop.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Categori
         Product result = products.get(i);
         CategoriesViewHolder.resultListItemBinding.setProduct(result);
 
+        if (!TextUtils.isEmpty(result.getName().trim())) {
+            String firstLetter = String.valueOf(result.getName().trim().toUpperCase().charAt(0));
+            CategoriesViewHolder.resultListItemBinding.textFirst.setText(firstLetter);
+        }
+
+        if (result.getVariants().size() > 0) {
+            String varientSize = String.valueOf(result.getVariants().size());
+            CategoriesViewHolder.resultListItemBinding.textVariants.setText("Colors  " + varientSize);
+        } else {
+            CategoriesViewHolder.resultListItemBinding.textVariants.setText("Colors  0");
+        }
         CategoriesViewHolder.resultListItemBinding.cvEmployee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,11 +96,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.Categori
 
         private ProductListItemBinding resultListItemBinding;
 
-        public CategoriesViewHolder(@NonNull ProductListItemBinding resultListItemBinding) {
+        private CategoriesViewHolder(@NonNull ProductListItemBinding resultListItemBinding) {
             super(resultListItemBinding.getRoot());
-
             this.resultListItemBinding = resultListItemBinding;
         }
+    }
+
+    public void updateList(ArrayList<Product> list) {
+        products = list;
+        notifyDataSetChanged();
     }
 
 }

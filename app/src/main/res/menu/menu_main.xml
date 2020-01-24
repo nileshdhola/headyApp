@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="example.javatpoint.com.optionmenu.MainActivity">
+
+    <item
+        android:id="@+id/menuView"
+        android:title="Most Viewed" />
+    <item
+        android:id="@+id/menuOrder"
+        android:title="Most Ordred" />
+    <item
+        android:id="@+id/menuShare"
+        android:title="Most Shared"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/menuClear"
+        android:title="Clear Filter" />
+</menu>

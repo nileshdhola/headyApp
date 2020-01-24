@@ -3,6 +3,7 @@ package com.heady.shop.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Product implements Serializable {
@@ -14,7 +15,7 @@ public class Product implements Serializable {
     @SerializedName("date_added")
     private String dateAdded;
     @SerializedName("variants")
-    private List<Variant> variants = null;
+    private ArrayList<Variant> variants = null;
     @SerializedName("tax")
 
     private Tax tax;
@@ -44,11 +45,11 @@ public class Product implements Serializable {
         this.dateAdded = dateAdded;
     }
 
-    public List<Variant> getVariants() {
+    public ArrayList<Variant> getVariants() {
         return variants;
     }
 
-    public void setVariants(List<Variant> variants) {
+    public void setVariants(ArrayList<Variant> variants) {
         this.variants = variants;
     }
 

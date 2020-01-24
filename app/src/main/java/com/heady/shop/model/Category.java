@@ -3,6 +3,7 @@ package com.heady.shop.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Category implements Serializable {
@@ -12,9 +13,9 @@ public class Category implements Serializable {
     @SerializedName("name")
     private String name;
     @SerializedName("products")
-    private List<Product> products = null;
+    private ArrayList<Product> products = null;
     @SerializedName("child_categories")
-    private List<String> childCategories = null;
+    private ArrayList<String> childCategories = null;
 
 
     public String getId() {
@@ -33,19 +34,19 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public List<Product> getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
 
-    public List<String> getChildCategories() {
+    public ArrayList<String> getChildCategories() {
         return childCategories;
     }
 
-    public void setChildCategories(List<String> childCategories) {
+    public void setChildCategories(ArrayList<String> childCategories) {
         this.childCategories = childCategories;
     }
 
