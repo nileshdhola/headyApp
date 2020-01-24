@@ -14,7 +14,7 @@ public class Category implements Serializable {
     @SerializedName("products")
     private List<Product> products = null;
     @SerializedName("child_categories")
-    private List<Integer> childCategories = null;
+    private List<String> childCategories = null;
 
 
     public String getId() {
@@ -41,11 +41,11 @@ public class Category implements Serializable {
         this.products = products;
     }
 
-    public List<Integer> getChildCategories() {
+    public List<String> getChildCategories() {
         return childCategories;
     }
 
-    public void setChildCategories(List<Integer> childCategories) {
+    public void setChildCategories(List<String> childCategories) {
         this.childCategories = childCategories;
     }
 

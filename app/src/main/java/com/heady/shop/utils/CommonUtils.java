@@ -1,5 +1,7 @@
 package com.heady.shop.utils;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -34,5 +36,9 @@ public class CommonUtils {
         //return null;
     }
     //endregion
+
+    public static String toJson(Object jsonObject) {
+        return new Gson().toJson(jsonObject);
+    }
 
 }
