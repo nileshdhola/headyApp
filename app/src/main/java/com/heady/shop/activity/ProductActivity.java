@@ -65,8 +65,10 @@ public class ProductActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         getProductDetails(productData);
+
     }
 
+    //region get product details data
     private void getProductDetails(String productData) {
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Product>>() {
@@ -90,6 +92,7 @@ public class ProductActivity extends AppCompatActivity {
             recyclerView.setVisibility(View.GONE);
         }
     }
+    //endregion
 
     @Override
     public void onBackPressed() {
@@ -103,7 +106,7 @@ public class ProductActivity extends AppCompatActivity {
         return true;
     }
 
-
+    //region onOptionsItemSelected
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -131,14 +134,20 @@ public class ProductActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    //endregion
 
-
+    //region filer item
     private void filter(String text) {
         if (text.equalsIgnoreCase("4")) {
             productAdapter.updateList(productList);
             return;
         }
+        filterAdapterData(text);
+    }
+    //endregion
 
+    //region filer item in adapter
+    private void filterAdapterData(String text) {
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Ranking>>() {
         }.getType();
@@ -153,7 +162,7 @@ public class ProductActivity extends AppCompatActivity {
         }
 
         ArrayList<Product> productRankings1 = new ArrayList<Product>();
-        
+        //add item product match
         for (ProductRanking ranking : productRankings) {
             for (Product product : productList) {
                 if (ranking.getId().equalsIgnoreCase(product.getId())) {
@@ -161,9 +170,10 @@ public class ProductActivity extends AppCompatActivity {
                     break;
                 }
             }
-
         }
+
         //update recyclerview
         productAdapter.updateList(productRankings1);
     }
+    //endregion
 }

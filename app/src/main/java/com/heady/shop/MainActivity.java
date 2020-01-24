@@ -1,6 +1,5 @@
 package com.heady.shop;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -60,11 +59,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
         //bind model data
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        getAllData(this);
+        getAllData();
     }
 
     //region show item in recyclerview adapter
-    private void getAllData(Context context) {
+    private void getAllData() {
         mainViewModel.getResponseResult(MainActivity.this).observe(this, new Observer<ResultResponse>() {
             @Override
             public void onChanged(ResultResponse resultResponse) {

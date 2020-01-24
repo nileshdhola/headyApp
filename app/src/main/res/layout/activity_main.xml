@@ -37,6 +37,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="No data found"
+            android:visibility="gone"
             android:textSize="20sp" />
 
         <androidx.recyclerview.widget.RecyclerView
